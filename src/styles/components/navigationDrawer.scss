@@ -1,0 +1,33 @@
+@use '../base' as *;
+
+.custom-drawer,
+.app-bar-mobile {
+  background-color: $primary-color !important;
+  color: $background-color !important;
+}
+
+.logo-container {
+  padding: 8px !important;
+}
+
+.logo-container-drawer {
+  display: flex;
+  align-items: center;
+}
+
+.brand-drawer {
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.logo-drawer {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  border-radius: 5px;
+}
+
+.active-item {
+  background-color: $secondary-color !important;
+}

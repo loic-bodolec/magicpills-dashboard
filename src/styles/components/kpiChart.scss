@@ -1,0 +1,15 @@
+@use '../base' as *;
+@use '../variables' as *;
+
+.kpi-chart-card {
+  border-radius: $border-radius !important;
+  border: 1px solid $secondary-color !important;
+  box-shadow: none !important;
+}
+
+.kpi-chart {
+  min-width: 500px;
+  min-height: 300px;
+  width: 100%;
+  height: 400px;
+}
