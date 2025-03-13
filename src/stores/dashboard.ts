@@ -12,12 +12,12 @@ export const useDashboardStore = defineStore('dashboard', {
     powersSold: [],
     customerReviews: [],
     salesStats: [],
-    crimePrevention: [],
-    activationTime: [],
-    conversionRate: [],
-    powerDuration: [],
-    customerSatisfaction: [],
-    sideEffectRate: [],
+    crimePrevention: { label: '', value: 0 },
+    activationTime: { label: '', value: 0 },
+    conversionRate: { label: '', value: 0 },
+    powerDuration: { label: '', value: 0 },
+    customerSatisfaction: { label: '', value: 0 },
+    sideEffectRate: { label: '', value: 0 },
     powerDurationByType: [],
   }),
   actions: {
@@ -33,12 +33,12 @@ export const useDashboardStore = defineStore('dashboard', {
         this.powersSold = data.powersSold ?? [];
         this.customerReviews = data.customerReviews ?? [];
         this.salesStats = data.salesStats ?? [];
-        this.crimePrevention = data.crimePrevention ?? [];
-        this.activationTime = data.activationTime ?? [];
-        this.conversionRate = data.conversionRate ?? [];
-        this.powerDuration = data.powerDuration ?? [];
-        this.customerSatisfaction = data.customerSatisfaction ?? [];
-        this.sideEffectRate = data.sideEffectRate ?? [];
+        this.crimePrevention = data.crimePrevention ?? { label: '', value: 0 };
+        this.activationTime = data.activationTime ?? { label: '', value: 0 };
+        this.conversionRate = data.conversionRate ?? { label: '', value: 0 };
+        this.powerDuration = data.powerDuration ?? { label: '', value: 0 };
+        this.customerSatisfaction = data.customerSatisfaction ?? { label: '', value: 0 };
+        this.sideEffectRate = data.sideEffectRate ?? { label: '', value: 0 };
         this.powerDurationByType = data.powerDurationByType ?? [];
       } catch (error) {
         this.isError = true;

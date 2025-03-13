@@ -6,50 +6,50 @@
     <!-- Cartes KPI -->
     <div class="kpi-cards" role="region" aria-labelledby="kpi-cards-title">
       <KpiCard
-        v-if="dashboardStore.conversionRate.length"
-        title="Taux de conversion"
-        :value="dashboardStore.conversionRate[0].value + ' %'"
+        v-if="dashboardStore.conversionRate"
+        :title="dashboardStore.conversionRate.label"
+        :value="dashboardStore.conversionRate.value + ' %'"
         :subtitle="`Visiteurs : ${dashboardStore.salesStats[0]?.value || 0}, Héros créés : ${dashboardStore.salesStats[1]?.value || 0}`"
         icon="mdi-percent-outline"
         iconColor="#fa9100"
         :tooltip="tooltips.conversion"
       />
       <KpiCard
-        v-if="dashboardStore.crimePrevention.length"
-        title="Crimes évités"
-        :value="dashboardStore.crimePrevention[0].value"
+        v-if="dashboardStore.crimePrevention"
+        :title="dashboardStore.crimePrevention.label"
+        :value="dashboardStore.crimePrevention.value"
         icon="mdi-shield-check-outline"
         iconColor="#fa9100"
         :tooltip="tooltips.crimePrevention"
       />
       <KpiCard
-        v-if="dashboardStore.activationTime.length"
-        title="Activation des pouvoirs"
-        :value="dashboardStore.activationTime[0].value + ' min'"
+        v-if="dashboardStore.activationTime"
+        :title="dashboardStore.activationTime.label"
+        :value="dashboardStore.activationTime.value + ' min'"
         icon="mdi-timer-outline"
         iconColor="#fa9100"
         :tooltip="tooltips.activationTime"
       />
       <KpiCard
-        v-if="dashboardStore.powerDuration.length"
-        title="Durée moyenne des pouvoirs"
-        :value="dashboardStore.powerDuration[0].value + ' heures'"
+        v-if="dashboardStore.powerDuration"
+        :title="dashboardStore.powerDuration.label"
+        :value="dashboardStore.powerDuration.value + ' heures'"
         icon="mdi-clock-outline"
         iconColor="#fa9100"
         :tooltip="tooltips.powerDuration"
       />
       <KpiCard
         v-if="averageReviewValues"
-        title="Moyenne des avis"
+        :title="`Avis clients (${totalReviewCount} avis)`"
         :value="averageReviewValues + ' / 5'"
         icon="mdi-star-outline"
         iconColor="#fa9100"
         :tooltip="tooltips.review"
       />
       <KpiCard
-        v-if="dashboardStore.sideEffectRate.length"
-        title="Effets secondaires"
-        :value="dashboardStore.sideEffectRate[0].value + ' %'"
+        v-if="dashboardStore.sideEffectRate"
+        :title="dashboardStore.sideEffectRate.label"
+        :value="dashboardStore.sideEffectRate.value + ' %'"
         icon="mdi-alert-outline"
         iconColor="#fa9100"
         :tooltip="tooltips.sideEffects"
@@ -104,6 +104,11 @@ const dashboardStore = useDashboardStore();
 
 onMounted(() => {
   dashboardStore.fetchDashboardData();
+});
+
+// Calcul de la somme des avis
+const totalReviewCount = computed<number>(() => {
+  return dashboardStore.customerReviews.reduce((sum, review) => sum + review.value, 0);
 });
 
 // Calcul de la moyenne des avis
