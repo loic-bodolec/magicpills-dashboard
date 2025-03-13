@@ -28,12 +28,12 @@ export const mockData: DashboardData = {
     { label: 'Pilules vendues', value: 1200 },
     { label: 'Clients devenus super-héros', value: 950 },
   ],
-  crimePrevention: [{ label: 'Crimes évités', value: 320 }],
-  activationTime: [{ label: 'Temps moyen avant effet', value: 5 }], // en minutes
-  conversionRate: [{ label: 'Taux de transformation', value: 85 }], // % de clients ayant acheté après visite
-  powerDuration: [{ label: 'Durée moyenne des pouvoirs', value: 12 }], // en heures
-  customerSatisfaction: [{ label: 'Taux de satisfaction client', value: 92 }],
-  sideEffectRate: [{ label: 'Effets secondaires signalés', value: 3 }], // en %
+  crimePrevention: { label: 'Crimes évités', value: 320 },
+  activationTime: { label: 'Temps moyen avant effet', value: 5 }, // en minutes
+  conversionRate: { label: 'Taux de conversion', value: 85 }, // % de clients ayant acheté après visite
+  powerDuration: { label: 'Durée moyenne des pouvoirs', value: 12 }, // en heures
+  customerSatisfaction: { label: 'Taux de satisfaction client', value: 92 },
+  sideEffectRate: { label: 'Effets secondaires signalés', value: 3 }, // en %
   powerDurationByType: [
     { power: 'Force surhumaine', value: 24 }, // durée en heures
     { power: 'Vol', value: 12 },
