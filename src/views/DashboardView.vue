@@ -10,29 +10,27 @@
 
     <!-- Sélecteur de date -->
     <v-row>
-  <v-col cols="12" md="3">
-    <v-menu v-model="menuStart" :close-on-content-click="false" transition="scale-transition">
-      <template v-slot:activator="{ props }">
-        <v-text-field v-model="startDateFormatted" label="Date de début" readonly v-bind="props"></v-text-field>
-      </template>
-      <v-date-picker v-model="startDate" @update:model-value="menuStart = false"></v-date-picker>
-    </v-menu>
-  </v-col>
-  <v-col cols="12" md="3">
-    <v-menu v-model="menuEnd" :close-on-content-click="false" transition="scale-transition">
-      <template v-slot:activator="{ props }">
-        <v-text-field v-model="endDateFormatted" label="Date de fin" readonly v-bind="props"></v-text-field>
-      </template>
-      <v-date-picker v-model="endDate" @update:model-value="menuEnd = false"></v-date-picker>
-    </v-menu>
-  </v-col>
-  <v-col cols="12" md="2">
-    <v-btn @click="fetchData" color="primary">Filtrer</v-btn>
-  </v-col>
-  <v-col cols="12" md="2">
-    <v-btn @click="resetFilters" color="secondary">Réinitialiser</v-btn>
-  </v-col>
-</v-row>
+      <v-col cols="12" md="3">
+        <DatePicker
+          v-model="startDate"
+          label="Date de début"
+          v-model:menu="menuStart"
+        />
+      </v-col>
+      <v-col cols="12" md="3">
+        <DatePicker
+          v-model="endDate"
+          label="Date de fin"
+          v-model:menu="menuEnd"
+        />
+      </v-col>
+      <v-col cols="12" md="2">
+        <v-btn @click="fetchData" color="primary">Filtrer</v-btn>
+      </v-col>
+      <v-col cols="12" md="2">
+        <v-btn @click="resetFilters" color="secondary">Réinitialiser</v-btn>
+      </v-col>
+    </v-row>
 
     <!-- Cartes KPI -->
     <div class="kpi-cards" role="region" aria-labelledby="kpi-cards-title">
@@ -51,36 +49,12 @@
     <!-- Graphiques -->
     <div class="charts" role="region" aria-labelledby="charts-title">
       <KpiChart
-        v-if="dashboardStore.salesPerDay.length"
-        title="Ventes de pilules par jour"
-        :labels="dashboardStore.salesPerDay.map((entry: SalesPerDay) => entry.date)"
-        :values="dashboardStore.salesPerDay.map((entry: SalesPerDay) => entry.value)"
-        chartType="bar"
-      />
-      <KpiChart
-        v-if="dashboardStore.powerDurationByType.length"
-        title="Durée moyenne des pouvoirs par type (en heures)"
-        :labels="dashboardStore.powerDurationByType.map((item: PowerStat) => item.power)"
-        :values="dashboardStore.powerDurationByType.map((item: PowerStat) => item.value)"
-        chartType="bar"
-      />
-
-      <KpiChart
-        v-if="dashboardStore.powersSold.length"
-        title="Répartition des pouvoirs vendus"
-        :labels="dashboardStore.powersSold.map((power: PowerStat) => power.power)"
-        :values="dashboardStore.powersSold.map((power: PowerStat) => power.value)"
-        chartType="pie"
-      />
-
-      <KpiChart
-        v-if="dashboardStore.customerReviews.length"
-        title="Nombre d'avis laissés"
-        :labels="
-          dashboardStore.customerReviews.map((review: CustomerReview) => review.rating.toString())
-        "
-        :values="dashboardStore.customerReviews.map((review: CustomerReview) => review.value)"
-        chartType="bar"
+        v-for="(chart, index) in charts"
+        :key="index"
+        :title="chart.title"
+        :labels="chart.labels"
+        :values="chart.values"
+        :chartType="chart.chartType"
       />
     </div>
 
@@ -106,9 +80,6 @@ const startDate = ref<Date | null>(null);
 const endDate = ref<Date | null>(null);
 const menuStart = ref(false);
 const menuEnd = ref(false);
-
-const startDateFormatted = computed(() => startDate.value?.toISOString().split('T')[0] || '');
-const endDateFormatted = computed(() => endDate.value?.toISOString().split('T')[0] || '');
 
 // Fonction pour récupérer les données filtrées
 const fetchData = async () => {
@@ -230,34 +201,19 @@ const tooltips: Record<string, string> = {
 </script>
 
 <style scoped lang="scss">
-/* style dans dashboard.scss */
+// TODO déplacer le style dans dans dashboard.scss
 .v-row {
   display: flex;
-  flex-wrap: wrap; /* Permet de passer à la ligne en version mobile */
-  align-items: center; /* Aligne les éléments verticalement */
-  justify-content: flex-start; /* Aligne les éléments au début de la ligne */
-  gap: 10px; /* Ajoute un espacement uniforme entre les colonnes */
-  margin-bottom: 20px; /* Ajoute un espacement sous la rangée */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px;
 }
-
-.v-col {
-  flex: 0 0 auto; /* Les colonnes prennent uniquement la largeur nécessaire */
-}
-
-.v-text-field {
-  width: 100%; /* Les champs de texte prennent toute la largeur disponible */
-  height: 40px; /* Uniformise la hauteur des champs de texte */
-}
-
 .v-btn {
-  width: 100%; /* Définit une largeur minimale pour les boutons */
-  height: 40px; /* Uniformise la hauteur des boutons avec les champs de texte */
-  margin-right: 10px; /* Ajoute un espacement entre les boutons */
-}
-
-@media (min-width: 768px) {
-  .v-row {
-    flex-wrap: nowrap; /* Empêche les éléments de passer à la ligne en version bureau */
-  }
+  width: 100%;
+  height: 55px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>
