@@ -11,7 +11,7 @@ describe('KpiCard.vue', () => {
       },
     });
 
-    expect(wrapper.find('#kpi-title').text()).toBe('Test Title');
+    expect(wrapper.find('.kpi-title-text').text()).toBe('Test Title');
     expect(wrapper.find('.kpi-card-value').text()).toBe('Test Value');
   });
 
@@ -41,7 +41,7 @@ describe('KpiCard.vue', () => {
       },
     });
 
-    expect(wrapper.find('#kpi-title').text()).toBe('Taux de conversion');
+    expect(wrapper.find('.kpi-title-text').text()).toBe('Taux de conversion');
     expect(wrapper.find('.kpi-card-value').text()).toBe('75%');
     expect(wrapper.find('.kpi-card-subtitle').text()).toBe('Visiteurs: 100, Héros créés: 75');
     const icon = wrapper.find('.v-icon');
