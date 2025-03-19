@@ -1,13 +1,33 @@
+export interface PowerStat {
+  power: string;
+  value: number;
+}
+
+export interface CustomerReview {
+  rating: string;
+  value: number;
+}
+
+export interface SalesPerDay {
+  day: string;
+  value: number;
+}
+
+export interface LabeledStat {
+  label: string;
+  value: number;
+}
+
 export interface DashboardData {
-  salesPerDay: { day: string; value: number }[];
-  powersSold: { power: string; value: number }[];
-  customerReviews: { rating: string; value: number }[];
-  salesStats: { label: string; value: number }[];
-  crimePrevention: { label: string; value: number };
-  activationTime: { label: string; value: number };
-  conversionRate: { label: string; value: number };
-  powerDuration: { label: string; value: number };
-  customerSatisfaction: { label: string; value: number };
-  sideEffectRate: { label: string; value: number };
-  powerDurationByType: { power: string; value: number }[];
+  salesPerDay: SalesPerDay[];
+  powersSold: PowerStat[];
+  customerReviews: CustomerReview[];
+  salesStats: LabeledStat[];
+  crimePrevention: LabeledStat;
+  activationTime: LabeledStat;
+  conversionRate: LabeledStat;
+  powerDuration: LabeledStat;
+  customerSatisfaction: LabeledStat;
+  sideEffectRate: LabeledStat;
+  powerDurationByType: PowerStat[];
 }

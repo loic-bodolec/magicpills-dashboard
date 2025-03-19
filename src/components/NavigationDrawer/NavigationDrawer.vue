@@ -19,7 +19,11 @@
     <!-- Logo -->
     <v-list-item v-if="!isMobile" class="logo-container">
       <div class="logo-container-drawer">
-        <img src="@/assets/logo-complet.webp" alt="Logo Magic'Pills, lien vers la page d'accueil" class="logo-drawer" />
+        <img
+          src="@/assets/logo-complet.webp"
+          alt="Logo Magic'Pills, lien vers la page d'accueil"
+          class="logo-drawer"
+        />
         <span class="brand-drawer" v-if="!isCompact">Magic'Pills</span>
       </div>
       <template v-slot:append>
