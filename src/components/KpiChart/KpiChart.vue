@@ -125,7 +125,7 @@ function getChartOptions(): EChartsOption {
   return {
     title: {
       text: props.title,
-      left: 'center',
+      left: 'left',
       textStyle: { fontSize: 16, color: '#2d3282', fontWeight: 'bold' },
     },
     tooltip: { trigger: 'item' },
@@ -163,7 +163,7 @@ function getChartOptions(): EChartsOption {
     series: [
       {
         name: props.title,
-        type: props.chartType || 'bar',
+        type: props.chartType,
         data: getData(),
         itemStyle: {
           color:
@@ -172,7 +172,6 @@ function getChartOptions(): EChartsOption {
                   props.barColors?.[dataIndex % props.barColors.length] || DEFAULT_COLOR
               : undefined,
           barBorderRadius: props.chartType === 'bar' ? [5, 5, 0, 0] : undefined,
-          shadowColor: 'rgba(0, 0, 0, 0.2)',
         },
         smooth: props.chartType === 'line',
         areaStyle: props.chartType === 'line' ? { opacity: 0.3 } : undefined,
