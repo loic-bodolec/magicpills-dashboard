@@ -10,4 +10,7 @@ export default createVuetify({
       mdi,
     },
   },
+  locale: {
+    locale: 'fr', // Définit la langue par défaut
+  },
 });

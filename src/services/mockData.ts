@@ -1,15 +1,29 @@
 import type { DashboardData } from '@/types/dashboard';
 
+/**
+ * Génère des données de ventes journalières depuis le 01/01/2025 jusqu'à aujourd'hui.
+ * @returns Un tableau de ventes par jour avec une date et une valeur aléatoire.
+ */
+export const generateSalesData = (): { date: string; value: number }[] => {
+  const startDate = new Date('2025-01-01');
+  const today = new Date();
+  const salesData = [];
+
+  while (startDate <= today) {
+    salesData.push({
+      date: startDate.toISOString().split('T')[0], // Format YYYY-MM-DD
+      value: Math.floor(Math.random() * 100) + 10, // Valeurs entre 10 et 110
+    });
+
+    startDate.setDate(startDate.getDate() + 1); // Passe au jour suivant
+  }
+
+  return salesData;
+};
+
+// Génération des données mockées
 export const mockData: DashboardData = {
-  salesPerDay: [
-    { day: 'Lun', value: 15 },
-    { day: 'Mar', value: 22 },
-    { day: 'Mer', value: 18 },
-    { day: 'Jeu', value: 30 },
-    { day: 'Ven', value: 25 },
-    { day: 'Sam', value: 40 },
-    { day: 'Dim', value: 35 },
-  ],
+  salesPerDay: generateSalesData(),
   powersSold: [
     { power: 'Force surhumaine', value: 45 },
     { power: 'Vol', value: 30 },

@@ -21,13 +21,14 @@ export const useDashboardStore = defineStore('dashboard', {
     powerDurationByType: [],
   }),
   actions: {
-    async fetchDashboardData() {
+    async fetchDashboardData(startDate: Date | null = null, endDate: Date | null = null) {
       this.isLoading = true;
       this.isError = false;
       this.errorMessage = '';
 
       try {
-        const data: DashboardData = await fetchMockDashboardData();
+        // Appel de l'API mockée avec les dates
+        const data: DashboardData = await fetchMockDashboardData(startDate, endDate);
 
         this.salesPerDay = data.salesPerDay ?? [];
         this.powersSold = data.powersSold ?? [];
