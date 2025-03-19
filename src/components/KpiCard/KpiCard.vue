@@ -1,12 +1,7 @@
 <template>
   <v-card class="kpi-card-container">
     <v-card-title class="kpi-card-title">
-      <v-icon
-        v-if="props.icon"
-        :style="{ color: props.iconColor }"
-        class="mr-2"
-        aria-hidden="true"
-      >
+      <v-icon v-if="props.icon" :style="{ color: props.iconColor }" class="mr-2" aria-hidden="true">
         {{ props.icon }}
       </v-icon>
       <span id="kpi-title">{{ props.title }}</span>

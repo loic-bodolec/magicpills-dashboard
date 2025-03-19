@@ -1,7 +1,9 @@
 <template>
   <div v-if="dashboardStore.isLoading" role="alert" aria-live="assertive">Chargement...</div>
   <div v-else class="dashboard">
-    <h1 class="dashboard-title" aria-label="Tableau de bord du suivi des ventes">Suivi des ventes de Magic'Pills</h1>
+    <h1 class="dashboard-title" aria-label="Tableau de bord du suivi des ventes">
+      Suivi des ventes de Magic'Pills
+    </h1>
 
     <!-- Cartes KPI -->
     <div class="kpi-cards" role="region" aria-labelledby="kpi-cards-title">
@@ -61,29 +63,34 @@
       <KpiChart
         v-if="dashboardStore.powerDurationByType.length"
         title="Durée moyenne des pouvoirs par type (en heures)"
-        :labels="dashboardStore.powerDurationByType.map(item => item.power)"
-        :values="dashboardStore.powerDurationByType.map(item => item.value)"
+        :labels="dashboardStore.powerDurationByType.map((item: PowerStat) => item.power)"
+        :values="dashboardStore.powerDurationByType.map((item: PowerStat) => item.value)"
         chartType="bar"
       />
+
       <KpiChart
         v-if="dashboardStore.powersSold.length"
         title="Répartition des pouvoirs vendus"
-        :labels="dashboardStore.powersSold.map(power => power.power)"
-        :values="dashboardStore.powersSold.map(power => power.value)"
+        :labels="dashboardStore.powersSold.map((power: PowerStat) => power.power)"
+        :values="dashboardStore.powersSold.map((power: PowerStat) => power.value)"
         chartType="pie"
       />
+
       <KpiChart
         v-if="dashboardStore.customerReviews.length"
         title="Nombre d'avis laissés"
-        :labels="dashboardStore.customerReviews.map(review => review.rating)"
-        :values="dashboardStore.customerReviews.map(review => review.value)"
+        :labels="
+          dashboardStore.customerReviews.map((review: CustomerReview) => review.rating.toString())
+        "
+        :values="dashboardStore.customerReviews.map((review: CustomerReview) => review.value)"
         chartType="bar"
       />
+
       <KpiChart
         v-if="dashboardStore.salesPerDay.length"
         title="Ventes de pilules par jour"
-        :labels="dashboardStore.salesPerDay.map(day => day.day)"
-        :values="dashboardStore.salesPerDay.map(day => day.value)"
+        :labels="dashboardStore.salesPerDay.map((day: SalesPerDay) => day.day)"
+        :values="dashboardStore.salesPerDay.map((day: SalesPerDay) => day.value)"
         chartType="bar"
       />
     </div>
@@ -95,10 +102,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from "vue";
-import { useDashboardStore } from "@/stores/dashboard";
-import KpiChart from "@/components/KpiChart/KpiChart.vue";
-import KpiCard from "@/components/KpiCard/KpiCard.vue";
+import { onMounted, computed } from 'vue';
+import { useDashboardStore } from '@/stores/dashboard';
+import KpiChart from '@/components/KpiChart/KpiChart.vue';
+import KpiCard from '@/components/KpiCard/KpiCard.vue';
+import type { PowerStat, CustomerReview, SalesPerDay } from '@/types/dashboard';
 
 const dashboardStore = useDashboardStore();
 
@@ -106,9 +114,12 @@ onMounted(() => {
   dashboardStore.fetchDashboardData();
 });
 
-// Calcul de la somme des avis
+// Calcul du nombre total d'avis
 const totalReviewCount = computed<number>(() => {
-  return dashboardStore.customerReviews.reduce((sum, review) => sum + review.value, 0);
+  return dashboardStore.customerReviews.reduce(
+    (sum, review) => sum + review.value,
+    0,
+  );
 });
 
 // Calcul de la moyenne des avis
@@ -123,13 +134,13 @@ const averageReviewValues = computed<number>(() => {
 });
 
 // Définition des tooltips
-const tooltips = {
-  conversion: "Ce taux correspond au pourcentage de visiteurs ayant acheté une pilule.",
-  crimePrevention: "Nombre de crimes évités grâce aux super-héros créés.",
+const tooltips: Record<string, string> = {
+  conversion: 'Ce taux correspond au pourcentage de visiteurs ayant acheté une pilule.',
+  crimePrevention: 'Nombre de crimes évités grâce aux super-héros créés.',
   activationTime: "Temps moyen avant que les pouvoirs ne s'activent.",
-  powerDuration: "Durée moyenne pendant laquelle les pouvoirs restent actifs.",
-  review: "Les avis des clients sont notés de 1 à 5 étoiles.",
-  sideEffects: "Pourcentage de clients ayant signalé des effets secondaires.",
+  powerDuration: 'Durée moyenne pendant laquelle les pouvoirs restent actifs.',
+  review: 'Les avis des clients sont notés de 1 à 5 étoiles.',
+  sideEffects: 'Pourcentage de clients ayant signalé des effets secondaires.',
 };
 </script>
 
