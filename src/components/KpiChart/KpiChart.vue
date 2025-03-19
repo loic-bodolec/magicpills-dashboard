@@ -49,13 +49,14 @@ interface ChartProps {
   chartType?: 'bar' | 'line' | 'pie' | 'radar';
   showLegend?: boolean;
   barColors?: string[];
+  barColors?: string[];
 }
 
 const props = defineProps<ChartProps>();
 const chartRef = ref<InstanceType<typeof VChart> | null>(null);
 
-const DEFAULT_COLOR = '#fa9100'; // Couleur orange par défaut
-const COLORS = ['#2d3282', '#fa9100', '#4CAF50', '#FF5722', '#9C27B0', '#00BCD4'];
+const DEFAULT_COLOR = "#fa9100"; // Couleur orange par défaut
+const COLORS = ["#2d3282", "#fa9100", "#4CAF50", "#FF5722", "#9C27B0", "#00BCD4"];
 
 // Forcer un resize après le rendu
 onMounted((): void => {
@@ -65,14 +66,11 @@ onMounted((): void => {
 });
 
 // Surveille les changements de props pour mettre à jour le graphique
-watch(
-  () => [props.labels, props.values, props.chartType, props.barColors],
-  (): void => {
-    nextTick((): void => {
-      chartRef.value?.resize();
-    });
-  },
-);
+watch(() => [props.labels, props.values, props.chartType, props.barColors], (): void => {
+  nextTick((): void => {
+    chartRef.value?.resize();
+  });
+});
 
 // Fonction pour générer les données en fonction du type de graphique
 function getData(): SeriesOption['data'] {
@@ -80,9 +78,7 @@ function getData(): SeriesOption['data'] {
     return props.labels.map((label, index) => ({
       name: label,
       value: props.values[index],
-      itemStyle: {
-        color: props.barColors?.[index % props.barColors.length] || COLORS[index % COLORS.length],
-      },
+      itemStyle: { color: props.barColors?.[index % props.barColors.length] || COLORS[index % COLORS.length] },
     }));
   } else {
     return props.values;
@@ -96,53 +92,30 @@ function getChartOptions(): EChartsOption {
       left: 'left',
       textStyle: { fontSize: 16, color: '#2d3282', fontWeight: 'bold' },
     },
-    tooltip: { trigger: 'item' },
-    legend: props.showLegend
-      ? { textStyle: { color: '#2d3282' }, orient: 'horizontal', bottom: '0', left: 'center' }
-      : undefined,
+    tooltip: { trigger: "item" },
+    legend: props.showLegend ? { textStyle: { color: "#2d3282" }, orient: 'horizontal', bottom: '0', left: 'center' } : undefined,
     grid: { left: '5%', right: '5%', bottom: '15%' },
-    xAxis:
-      props.chartType !== 'pie' && props.chartType !== 'radar'
-        ? {
-            type: 'category',
-            data: props.labels,
-            axisLabel: { color: '#333' },
-            axisLine: { lineStyle: { color: '#333' } },
-          }
-        : undefined,
-    yAxis:
-      props.chartType !== 'pie' && props.chartType !== 'radar'
-        ? {
-            type: 'value',
-            axisLabel: { color: '#333' },
-            axisLine: { lineStyle: { color: '#333' } },
-          }
-        : undefined,
-    radar:
-      props.chartType === 'radar'
-        ? {
-            indicator: props.labels.map((label) => ({
-              name: label,
-              max: Math.max(...props.values) + 10,
-            })),
-            axisName: { color: '#333' },
-          }
-        : undefined,
+    xAxis: props.chartType !== "pie" && props.chartType !== "radar" ? { type: "category", data: props.labels, axisLabel: { color: "#333" }, axisLine: { lineStyle: { color: "#333" } } } : undefined,
+    yAxis: props.chartType !== "pie" && props.chartType !== "radar" ? { type: "value", axisLabel: { color: "#333" }, axisLine: { lineStyle: { color: "#333" } } } : undefined,
+    radar: props.chartType === "radar" ? {
+      indicator: props.labels.map((label) => ({ name: label, max: Math.max(...props.values) + 10 })),
+      axisName: { color: "#333" },
+    } : undefined,
     series: [
       {
         name: props.title,
         type: props.chartType,
         data: getData(),
         itemStyle: {
-          color:
-            props.chartType === 'bar'
-              ? ({ dataIndex }: { dataIndex: number }) =>
-                  props.barColors?.[dataIndex % props.barColors.length] || DEFAULT_COLOR
-              : undefined,
-          barBorderRadius: props.chartType === 'bar' ? [5, 5, 0, 0] : undefined,
+          color: props.chartType === "bar"
+            ? ({ dataIndex }: { dataIndex: number }) =>
+                props.barColors?.[dataIndex % props.barColors.length] || DEFAULT_COLOR
+            : undefined,
+          barBorderRadius: props.chartType === "bar" ? [5, 5, 0, 0] : undefined,
+          shadowColor: "rgba(0, 0, 0, 0.2)",
         },
-        smooth: props.chartType === 'line',
-        areaStyle: props.chartType === 'line' ? { opacity: 0.3 } : undefined,
+        smooth: props.chartType === "line",
+        areaStyle: props.chartType === "line" ? { opacity: 0.3 } : undefined,
       } as SeriesOption,
     ],
   };
