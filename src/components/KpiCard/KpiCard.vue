@@ -1,10 +1,12 @@
 <template>
   <v-card class="kpi-card-container">
-    <v-card-title class="kpi-card-title">
-      <v-icon v-if="props.icon" :style="{ color: props.iconColor }" class="mr-2" aria-hidden="true">
-        {{ props.icon }}
-      </v-icon>
-      <span id="kpi-title">{{ props.title }}</span>
+    <v-card-title class="kpi-card-header">
+      <div class="kpi-card-title">
+        <v-icon v-if="props.icon" :style="{ color: props.iconColor }" aria-hidden="true">
+          {{ props.icon }}
+        </v-icon>
+        <span class="kpi-title-text">{{ props.title }}</span>
+      </div>
 
       <v-tooltip v-if="props.tooltip" location="bottom" open-on-click>
         <template v-slot:activator="{ props: tooltipProps }">
@@ -50,4 +52,9 @@ const props = defineProps<KpiCardProps>();
 
 <style scoped lang="scss">
 /* style dans kpiCard.scss */
+.kpi-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 </style>

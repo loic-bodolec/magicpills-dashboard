@@ -13,6 +13,16 @@
   height: 135px !important;
 }
 
+.kpi-card-container:hover {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.kpi-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .kpi-card-title {
   font-size: $font-size-large !important;
   color: $primary-color;
@@ -20,6 +30,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.kpi-title-text {
+  margin-left: 10px;
 }
 
 .kpi-card-subtitle {
