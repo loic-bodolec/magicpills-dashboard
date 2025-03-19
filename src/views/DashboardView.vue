@@ -42,8 +42,9 @@
       />
       <KpiCard
         v-if="averageReviewValues"
-        :title="`Avis clients (${totalReviewCount} avis)`"
+        :title="`Avis clients`"
         :value="averageReviewValues + ' / 5'"
+        :subtitle="`Nombre d'avis : ${totalReviewCount}`"
         icon="mdi-star-outline"
         iconColor="#fa9100"
         :tooltip="tooltips.review"

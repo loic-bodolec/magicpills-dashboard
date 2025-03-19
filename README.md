@@ -1,4 +1,4 @@
-# Magic'Pills - dashboard
+# Magic'Pills - dashboard (basic)
 
 - TypeScript
 - Vue.js 3
