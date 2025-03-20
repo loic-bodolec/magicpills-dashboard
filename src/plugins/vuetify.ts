@@ -13,5 +13,15 @@ export default createVuetify({
   },
   locale: {
     locale: 'fr', // Définit la langue par défaut
+    messages: { fr }, // Définit les messages de la langue par défaut
+  },
+  defaults: {
+    VDatePicker: {
+      locale: 'fr',
+      labels: {
+        selectDate: 'Sélectionner une date',
+        enterDate: 'Entrer la date',
+      },
+    },
   },
 });

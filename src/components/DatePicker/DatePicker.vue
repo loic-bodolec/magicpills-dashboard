@@ -13,10 +13,6 @@
         v-bind="props"
         :label="label"
         readonly
-<<<<<<< HEAD
-=======
-        dense
->>>>>>> 4012d1c (refacto: create DatePicker component for enhanced date selection functionality)
         outlined
       ></v-text-field>
     </template>
@@ -26,11 +22,8 @@
       :max="maxDate"
       :min="minDate"
       scrollable
-<<<<<<< HEAD
       color="#2d3282"
       elevation="24"
-=======
->>>>>>> 4012d1c (refacto: create DatePicker component for enhanced date selection functionality)
     ></v-date-picker>
   </v-menu>
 </template>
