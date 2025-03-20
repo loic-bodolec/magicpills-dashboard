@@ -26,33 +26,10 @@ import {
   TitleComponent,
 } from 'echarts/components';
 import VChart from 'vue-echarts';
-import { ref, onMounted, nextTick, watch } from 'vue';
-import { use } from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
-import { BarChart, LineChart, PieChart, RadarChart } from 'echarts/charts';
-import {
-  GridComponent,
-  TooltipComponent,
-  LegendComponent,
-  TitleComponent,
-} from 'echarts/components';
-import VChart from 'vue-echarts';
 import { VCard, VCardText } from 'vuetify/components';
-import type { EChartsOption, SeriesOption } from 'echarts';
 import type { EChartsOption, SeriesOption } from 'echarts';
 
 // Chargement des modules ECharts nécessaires
-use([
-  CanvasRenderer,
-  BarChart,
-  LineChart,
-  PieChart,
-  RadarChart,
-  GridComponent,
-  TooltipComponent,
-  LegendComponent,
-  TitleComponent,
-]);
 use([
   CanvasRenderer,
   BarChart,
@@ -70,9 +47,7 @@ interface ChartProps {
   labels: string[];
   values: number[];
   chartType?: 'bar' | 'line' | 'pie' | 'radar';
-  chartType?: 'bar' | 'line' | 'pie' | 'radar';
   showLegend?: boolean;
-  barColors?: string[];
   barColors?: string[];
 }
 
@@ -101,7 +76,6 @@ watch(
 
 // Fonction pour générer les données en fonction du type de graphique
 function getData(): SeriesOption['data'] {
-  if (props.chartType === 'pie') {
   if (props.chartType === 'pie') {
     return props.labels.map((label, index) => ({
       name: label,
