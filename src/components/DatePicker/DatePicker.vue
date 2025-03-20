@@ -32,41 +32,41 @@
 import { ref, watch, computed } from 'vue';
 
 interface Props {
-  modelValue: Date | null;
-  label: string;
-  menu: boolean;
-  maxDate?: string;
-  minDate?: string;
+  modelValue: Date | null; // La valeur de la date sélectionnée (passée par le parent)
+  label: string; // Le texte affiché comme étiquette du champ texte
+  menu: boolean; // Contrôle l'état du menu (ouvert/fermé)
+  maxDate?: string; // La date maximale sélectionnable
+  minDate?: string; // La date minimale sélectionnable
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits(['update:model-value']);
+const emit = defineEmits(['update:model-value']); // Événement émis pour mettre à jour la valeur dans le parent
 
-// Local state to avoid directly mutating the prop
+// État local pour éviter de modifier directement la prop
 const localValue = ref(props.modelValue);
 
-// Watch for changes in the prop and update the local state
+// Surveille les changements de la prop et met à jour l'état local
 watch(() => props.modelValue, (newValue) => {
   localValue.value = newValue;
 });
 
-// Watch for changes in the local state and emit updates to the parent
+// Surveille les changements de l'état local et émet les mises à jour vers le parent
 watch(localValue, (newValue) => {
   emit('update:model-value', newValue);
 });
 
-// Gestion de l'état du menu
+// Gestion de l'état du menu (ouvert/fermé)
 const isMenuOpen = ref(false);
 
-// Formate la date pour l'affichage dans le champ texte
+// Formate la date pour l'affichage dans le champ texte (format YYYY-MM-DD)
 const formattedDate = computed(() =>
   props.modelValue ? props.modelValue.toISOString().split('T')[0] : ''
 );
 
-// Met à jour la date et ferme le menu
+// Met à jour la date sélectionnée et ferme le menu
 const onDateChange = (value: Date | null) => {
-  emit('update:model-value', value);
-  isMenuOpen.value = false;
+  emit('update:model-value', value); // Émet la nouvelle date vers le parent
+  isMenuOpen.value = false; // Ferme le menu
 };
 </script>
 
