@@ -110,11 +110,6 @@ const onDateChange = (value: Date | null) => {
 .v-text-field {
   width: 100%;
   height: 55px;
-<<<<<<< HEAD
-  font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-=======
-  border-radius: 8px;
   font-weight: 500;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 >>>>>>> 4012d1c (refacto: create DatePicker component for enhanced date selection functionality)
