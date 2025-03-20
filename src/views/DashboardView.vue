@@ -192,7 +192,7 @@ const averageReviewValues = computed(() => {
 </script>
 
 <style scoped lang="scss">
-// TODO déplacer le style dans dans dashboard.scss
+// TODO déplacer le style dans dashboard.scss
 .v-row {
   display: flex;
   flex-wrap: wrap;
