@@ -9,7 +9,7 @@ export interface CustomerReview {
 }
 
 export interface SalesPerDay {
-  day: string;
+  date: string;
   value: number;
 }
 

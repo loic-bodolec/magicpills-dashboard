@@ -89,6 +89,7 @@ function getData(): SeriesOption['data'] {
   }
 }
 
+// Fonction pour générer les options du graphique
 function getChartOptions(): EChartsOption {
   return {
     title: {
