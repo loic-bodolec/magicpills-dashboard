@@ -202,9 +202,8 @@ const averageReviewValues = computed(() => {
 }
 .v-btn {
   width: 100%;
-  height: 55px;
   border-radius: 8px;
-  font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 </style>
