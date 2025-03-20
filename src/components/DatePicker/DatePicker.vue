@@ -76,6 +76,6 @@ const onDateChange = (value: Date | null) => {
   width: 100%;
   height: 55px;
   font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 </style>
