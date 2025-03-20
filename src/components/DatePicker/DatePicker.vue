@@ -13,7 +13,6 @@
         v-bind="props"
         :label="label"
         readonly
-        dense
         outlined
       ></v-text-field>
     </template>
@@ -23,6 +22,8 @@
       :max="maxDate"
       :min="minDate"
       scrollable
+      color="#2d3282"
+      elevation="24"
     ></v-date-picker>
   </v-menu>
 </template>
