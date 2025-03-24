@@ -1,7 +1,10 @@
-import { format, addDays, differenceInCalendarDays } from 'date-fns';
+// Données mockées pour le tableau de bord => données dynamiques peu réalistes :-)
 import type { DashboardData } from '@/types/dashboard';
 
 /**
+ * Génère des données de ventes journalières pour une période définie.
+ * @param startDateStr - Date de début au format YYYY-MM-DD.
+ * @param endDateStr - Date de fin au format YYYY-MM-DD.
  * Génère des données de ventes journalières pour une période définie.
  * @param startDateStr - Date de début au format YYYY-MM-DD.
  * @param endDateStr - Date de fin au format YYYY-MM-DD.
@@ -13,10 +16,15 @@ const generateSalesData = (
 ): { date: string; value: number }[] => {
   const startDate = new Date(startDateStr);
   const endDate = new Date(endDateStr);
+const generateSalesData = (
+  startDateStr: string,
+  endDateStr: string,
+): { date: string; value: number }[] => {
+  const startDate = new Date(startDateStr);
+  const endDate = new Date(endDateStr);
   const salesData = [];
 
-  let currentDate = startDate;
-  while (currentDate <= endDate) {
+  while (startDate <= endDate) {
     salesData.push({
       date: format(currentDate, 'yyyy-MM-dd'), // Format YYYY-MM-DD
       value: Math.floor(Math.random() * 100) + 10, // Valeurs entre 10 et 110
@@ -93,7 +101,8 @@ const generatePowerDurationByType = (): { power: string; value: number }[] => {
 const calculateDaysBetween = (startDate: string, endDate: string): number => {
   const start = new Date(startDate);
   const end = new Date(endDate);
-  return differenceInCalendarDays(end, start) + 1; // Inclut les deux dates
+  const diffTime = Math.abs(end.getTime() - start.getTime());
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Inclut les deux dates
 };
 
 /**
