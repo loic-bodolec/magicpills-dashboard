@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { fetchMockDashboardData } from '@/services/mockApi';
 import type { DashboardData } from '@/types/dashboard';
 import { getErrorMessage } from '@/utils/errorUtils';
+import { format } from 'date-fns'; // Utilisation de date-fns pour un formatage cohérent
 
 export const useDashboardStore = defineStore('dashboard', {
   state: (): DashboardData & { isLoading: boolean; isError: boolean; errorMessage: string } => ({
@@ -38,8 +39,15 @@ export const useDashboardStore = defineStore('dashboard', {
       this.errorMessage = '';
 
       try {
-        // Appel de l'API mockée avec les dates
-        const data: DashboardData = await fetchMockDashboardData(startDate, endDate);
+        // Formatage des dates en YYYY-MM-DD
+        const formattedStartDate = startDate ? format(startDate, 'yyyy-MM-dd') : null;
+        const formattedEndDate = endDate ? format(endDate, 'yyyy-MM-dd') : null;
+
+        // Appel de l'API mockée avec les dates formatées
+        const data: DashboardData = await fetchMockDashboardData(
+          formattedStartDate ? new Date(formattedStartDate) : null,
+          formattedEndDate ? new Date(formattedEndDate) : null,
+        );
 
         this.crimePrevention = data.crimePrevention ?? { label: '', value: 0 };
         this.activationTime = data.activationTime ?? { label: '', value: 0 };

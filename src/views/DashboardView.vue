@@ -65,11 +65,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { ref, computed, onMounted } from 'vue';
 import { useDashboardStore } from '@/stores/dashboard';
 import KpiChart from '@/components/KpiChart/KpiChart.vue';
 import KpiCard from '@/components/KpiCard/KpiCard.vue';
 import DatePicker from '@/components/DatePicker/DatePicker.vue';
+import { format } from 'date-fns';
 import type { PowerStat, CustomerReview, SalesPerDay } from '@/types/dashboard';
 
 const dashboardStore = useDashboardStore();
@@ -82,7 +82,10 @@ const menuEnd = ref(false);
 
 // Fonction pour récupérer les données filtrées
 const fetchData = async () => {
-  await dashboardStore.fetchDashboardData(startDate.value, endDate.value);
+  const formattedStartDate = startDate.value ? format(startDate.value, 'yyyy-MM-dd') : null;
+  const formattedEndDate = endDate.value ? format(endDate.value, 'yyyy-MM-dd') : null;
+
+  await dashboardStore.fetchDashboardData(formattedStartDate, formattedEndDate);
 };
 
 // Fonction pour réinitialiser les filtres
