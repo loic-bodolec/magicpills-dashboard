@@ -24,12 +24,14 @@
       scrollable
       color="#2d3282"
       elevation="24"
-    ></v-date-picker>
+      show-adjacent-months
+    />
   </v-menu>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
+import { format } from 'date-fns';
 
 interface Props {
   modelValue: Date | null; // La valeur de la date sélectionnée (passée par le parent)
@@ -58,9 +60,9 @@ watch(localValue, (newValue) => {
 // Gestion de l'état du menu (ouvert/fermé)
 const isMenuOpen = ref(false);
 
-// Formate la date pour l'affichage dans le champ texte (format YYYY-MM-DD)
+// Formate la date pour l'affichage dans le champ texte (format DD-MM-YYYY)
 const formattedDate = computed(() =>
-  props.modelValue ? props.modelValue.toISOString().split('T')[0] : ''
+  props.modelValue ? format(new Date(props.modelValue), 'dd-MM-yyyy') : ''
 );
 
 // Met à jour la date sélectionnée et ferme le menu

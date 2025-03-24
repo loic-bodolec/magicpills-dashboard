@@ -1,4 +1,5 @@
-import { mockData } from '@/services/mockData';
+import { generateMockData } from '@/services/mockData';
+import { format } from 'date-fns';
 import type { DashboardData } from '@/types/dashboard';
 
 /**
@@ -11,16 +12,18 @@ export const fetchMockDashboardData = async (
   startDate?: Date | null,
   endDate?: Date | null,
 ): Promise<DashboardData> => {
-  // Si aucune période sélectionnée, on retourne toutes les données
-  if (!startDate && !endDate) {
-    return mockData;
-  }
+  // Définir des dates par défaut si aucune période n'est sélectionnée
+  const defaultStartDate = '2025-01-01';
+  const defaultEndDate = format(new Date(), 'yyyy-MM-dd'); // Format YYYY-MM-DD
 
-  // Convertir les dates en format YYYY-MM-DD pour comparaison
-  const start = startDate ? startDate.toISOString().split('T')[0] : null;
-  const end = endDate ? endDate.toISOString().split('T')[0] : null;
+  // Convertir les dates en format YYYY-MM-DD
+  const start = startDate ? format(startDate, 'yyyy-MM-dd') : defaultStartDate;
+  const end = endDate ? format(endDate, 'yyyy-MM-dd') : defaultEndDate;
 
-  // Filtrer les ventes par jour
+  // Générer les données dynamiques pour la période donnée
+  const mockData = generateMockData(start, end);
+
+  // Filtrer les ventes par jour (si nécessaire)
   const filteredSalesPerDay = mockData.salesPerDay.filter((entry) => {
     const entryDate = entry.date;
     return (!start || entryDate >= start) && (!end || entryDate <= end);

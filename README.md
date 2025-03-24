@@ -1,13 +1,26 @@
-# Magic'Pills - dashboard (basic)
+# Magic'Pills - Dashboard (Basic)
 
-- TypeScript
-- Vue.js 3
-- Vuetify (UI Components)
-- Pinia (State Management)
-- Vue-router (Routing)
-- Echarts / Vue-echarts (Graphicals)
+This project is designed as a **learning and practice exercise** for working with **Vue.js 3** and its ecosystem.
+
+## Technologies Used
+
+- **TypeScript**
+- **Vue.js 3**
+- **Vuetify** (UI Components)
+- **Pinia** (State Management)
+- **Vue-router** (Routing)
+- **Echarts / Vue-echarts** (Charts and Graphs)
 
 ![Project Image](./readme-images/screenshot.png)
+
+## Project Goals
+
+- Learn and practice **Vue.js 3** and its ecosystem.
+- Understand how to use **Pinia** for state management.
+- Explore **Vuetify** for building responsive and accessible UI components.
+- Implement routing with **Vue-router**.
+- Integrate **Echarts** for creating dynamic and interactive charts.
+- Gain experience with TypeScript in a Vue.js project.
 
 ## Recommended IDE Setup
 
@@ -72,7 +85,8 @@ npm run lint
 
 ### TODOs
 
-- Implement unit tests
-- Implement end-to-end (E2E) tests
-- Develop filtering functionality
-- Add performance indicators (e.g., notifications, trend icons, etc.)
+- Implement unit tests to ensure the reliability of components and logic.
+- Implement end-to-end (E2E) tests to validate the user journey and interactions.
+- Develop filtering functionality for dynamic data visualization based on user input.
+- Add performance indicators (e.g., notifications, trend icons, etc.) to enhance the dashboard's usability.
+- Integrate a back-end connection to fetch real-time data instead of using mock data.

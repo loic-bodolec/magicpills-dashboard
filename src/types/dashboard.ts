@@ -27,7 +27,6 @@ export interface DashboardData {
   activationTime: LabeledStat;
   conversionRate: LabeledStat;
   powerDuration: LabeledStat;
-  customerSatisfaction: LabeledStat;
   sideEffectRate: LabeledStat;
   powerDurationByType: PowerStat[];
 }
