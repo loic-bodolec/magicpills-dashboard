@@ -24,7 +24,8 @@
       scrollable
       color="#2d3282"
       elevation="24"
-    ></v-date-picker>
+      show-adjacent-months
+    />
   </v-menu>
 </template>
 
@@ -58,9 +59,11 @@ watch(localValue, (newValue) => {
 // Gestion de l'état du menu (ouvert/fermé)
 const isMenuOpen = ref(false);
 
-// Formate la date pour l'affichage dans le champ texte (format YYYY-MM-DD)
+// Formate la date pour l'affichage dans le champ texte
 const formattedDate = computed(() =>
-  props.modelValue ? props.modelValue.toISOString().split('T')[0] : ''
+  props.modelValue
+    ? new Date(props.modelValue).toLocaleDateString('fr-FR') // Format JJ/MM/AAAA
+    : ''
 );
 
 // Met à jour la date sélectionnée et ferme le menu
