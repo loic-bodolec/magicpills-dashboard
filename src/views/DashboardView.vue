@@ -69,7 +69,7 @@ import { useDashboardStore } from '@/stores/dashboard';
 import KpiChart from '@/components/KpiChart/KpiChart.vue';
 import KpiCard from '@/components/KpiCard/KpiCard.vue';
 import DatePicker from '@/components/DatePicker/DatePicker.vue';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 import type { PowerStat, CustomerReview, SalesPerDay } from '@/types/dashboard';
 
 const dashboardStore = useDashboardStore();
@@ -82,10 +82,8 @@ const menuEnd = ref(false);
 
 // Fonction pour récupérer les données filtrées
 const fetchData = async () => {
-  const formattedStartDate = startDate.value ? format(startDate.value, 'yyyy-MM-dd') : null;
-  const formattedEndDate = endDate.value ? format(endDate.value, 'yyyy-MM-dd') : null;
-
-  await dashboardStore.fetchDashboardData(formattedStartDate, formattedEndDate);
+  // Transmettez directement les objets Date au store
+  await dashboardStore.fetchDashboardData(startDate.value, endDate.value);
 };
 
 // Fonction pour réinitialiser les filtres
