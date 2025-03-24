@@ -60,11 +60,9 @@ watch(localValue, (newValue) => {
 // Gestion de l'état du menu (ouvert/fermé)
 const isMenuOpen = ref(false);
 
-// Formate la date pour l'affichage dans le champ texte
+// Formate la date pour l'affichage dans le champ texte (format DD-MM-YYYY)
 const formattedDate = computed(() =>
-  props.modelValue
-    ? new Date(props.modelValue).toLocaleDateString('fr-FR') // Format JJ/MM/AAAA
-    : ''
+  props.modelValue ? format(new Date(props.modelValue), 'dd-MM-yyyy') : ''
 );
 
 // Met à jour la date sélectionnée et ferme le menu
