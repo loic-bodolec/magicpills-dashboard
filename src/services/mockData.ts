@@ -1,4 +1,4 @@
-// Données mockées pour le tableau de bord => données dynamiques peu réalistes :-)
+import { format, addDays, differenceInCalendarDays } from 'date-fns';
 import type { DashboardData } from '@/types/dashboard';
 
 /**
@@ -24,7 +24,8 @@ const generateSalesData = (
   const endDate = new Date(endDateStr);
   const salesData = [];
 
-  while (startDate <= endDate) {
+  let currentDate = startDate;
+  while (currentDate <= endDate) {
     salesData.push({
       date: format(currentDate, 'yyyy-MM-dd'), // Format YYYY-MM-DD
       value: Math.floor(Math.random() * 100) + 10, // Valeurs entre 10 et 110
@@ -101,8 +102,7 @@ const generatePowerDurationByType = (): { power: string; value: number }[] => {
 const calculateDaysBetween = (startDate: string, endDate: string): number => {
   const start = new Date(startDate);
   const end = new Date(endDate);
-  const diffTime = Math.abs(end.getTime() - start.getTime());
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Inclut les deux dates
+  return differenceInCalendarDays(end, start) + 1; // Inclut les deux dates
 };
 
 /**
