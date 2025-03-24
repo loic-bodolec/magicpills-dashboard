@@ -1,4 +1,3 @@
-// TODO continuer à implémenter les filtrages de date sur les KpiCard et KpiChart (composants et moCkDatA)
 <template>
   <div v-if="dashboardStore.isLoading" role="alert" aria-live="assertive">
     Chargement...
@@ -100,33 +99,33 @@ onMounted(() => {
 // Données pour les KPI Cards
 const kpiStats = computed(() => [
   {
-    title: dashboardStore.conversionRate?.label,
-    value: `${dashboardStore.conversionRate?.value || 0} %`,
+    title: 'Taux de conversion',
+    value: `${dashboardStore.calculatedConversionRate} %`,
     subtitle: `Visiteurs : ${dashboardStore.salesStats[0]?.value || 0}, Héros créés : ${dashboardStore.salesStats[1]?.value || 0}`,
     icon: 'mdi-percent-outline',
     iconColor: '#fa9100',
-    tooltip: tooltips.conversion,
+    tooltip: 'Ce taux correspond au pourcentage de visiteurs ayant acheté une pilule.',
   },
   {
     title: dashboardStore.crimePrevention?.label,
     value: dashboardStore.crimePrevention?.value || 0,
     icon: 'mdi-shield-check-outline',
     iconColor: '#fa9100',
-    tooltip: tooltips.crimePrevention,
+    tooltip: 'Nombre de crimes évités grâce aux super-héros créés.',
   },
   {
     title: dashboardStore.activationTime?.label,
     value: `${dashboardStore.activationTime?.value || 0} min`,
     icon: 'mdi-timer-outline',
     iconColor: '#fa9100',
-    tooltip: tooltips.activationTime,
+    tooltip: "Temps moyen avant que les pouvoirs ne s'activent.",
   },
   {
     title: dashboardStore.powerDuration?.label,
     value: `${dashboardStore.powerDuration?.value || 0} heures`,
     icon: 'mdi-clock-outline',
     iconColor: '#fa9100',
-    tooltip: tooltips.powerDuration,
+    tooltip: 'Durée moyenne pendant laquelle les pouvoirs restent actifs.',
   },
   {
     title: 'Avis clients',
@@ -134,14 +133,14 @@ const kpiStats = computed(() => [
     subtitle: `Nombre d'avis : ${totalReviewCount.value}`,
     icon: 'mdi-star-outline',
     iconColor: '#fa9100',
-    tooltip: tooltips.review,
+    tooltip: 'Les avis des clients sont notés de 1 à 5 étoiles.',
   },
   {
     title: dashboardStore.sideEffectRate?.label,
     value: `${dashboardStore.sideEffectRate?.value || 0} %`,
     icon: 'mdi-alert-outline',
     iconColor: '#fa9100',
-    tooltip: tooltips.sideEffects,
+    tooltip: 'Pourcentage de clients ayant signalé des effets secondaires.',
   },
 ]);
 
@@ -154,7 +153,7 @@ const charts = computed(() => [
     chartType: 'bar' as const,
   },
   {
-  title: 'Répartition des pouvoirs vendus',
+    title: 'Répartition des pouvoirs vendus',
     labels: dashboardStore.powersSold.map((power: PowerStat) => power.power),
     values: dashboardStore.powersSold.map((power: PowerStat) => power.value),
     chartType: 'pie' as const,
@@ -188,20 +187,9 @@ const averageReviewValues = computed(() => {
   });
   return totalWeight > 0 ? parseFloat((totalReviews / totalWeight).toFixed(2)) : 0;
 });
-
-// Définition des tooltips
-const tooltips: Record<string, string> = {
-  conversion: 'Ce taux correspond au pourcentage de visiteurs ayant acheté une pilule.',
-  crimePrevention: 'Nombre de crimes évités grâce aux super-héros créés.',
-  activationTime: "Temps moyen avant que les pouvoirs ne s'activent.",
-  powerDuration: 'Durée moyenne pendant laquelle les pouvoirs restent actifs.',
-  review: 'Les avis des clients sont notés de 1 à 5 étoiles.',
-  sideEffects: 'Pourcentage de clients ayant signalé des effets secondaires.',
-};
 </script>
 
 <style scoped lang="scss">
-// TODO déplacer le style dans dashboard.scss
 .v-row {
   display: flex;
   flex-wrap: wrap;
