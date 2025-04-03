@@ -5,9 +5,10 @@ import vue from '@vitejs/plugin-vue';
 import vueDevTools from 'vite-plugin-vue-devtools';
 import vuetify from 'vite-plugin-vuetify';
 
-export default defineConfig(({ mode }) => ({
-  // Utiliser une base dynamique en fonction de l'environnement
-  base: mode === 'production' ? '/magicpills-dashboard/' : '/',
+export default defineConfig({
+  // TODO Utiliser une base dynamique en fonction de l'environnement
+  // base: process.env.NODE_ENV === 'production' ? '/magicpills-dashboard/' : '/',
+  base: '/',
   plugins: [
     vue(),
     vueDevTools(),
@@ -20,4 +21,4 @@ export default defineConfig(({ mode }) => ({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-}));
+});
