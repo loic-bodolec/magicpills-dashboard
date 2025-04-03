@@ -1,7 +1,8 @@
 import { mergeConfig, defineConfig, configDefaults } from 'vitest/config';
-import { createViteConfig } from './vite.config';
+import { createViteConfig } from './vite.config'; // Importez la fonction utilitaire
 import path from 'path';
 
+// Utilisez une configuration statique pour Vitest
 export default mergeConfig(
   createViteConfig('build'), // Génère une configuration statique pour Vitest
   defineConfig({

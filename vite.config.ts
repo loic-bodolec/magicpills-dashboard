@@ -25,4 +25,7 @@ export function createViteConfig(command: 'serve' | 'build') {
 }
 
 // Configuration par défaut pour Vite
-export default defineConfig(({ command }) => createViteConfig(command));
+export default defineConfig(({ command }) => {
+  // Appelle createViteConfig avec le bon argument
+  return createViteConfig(command);
+});
