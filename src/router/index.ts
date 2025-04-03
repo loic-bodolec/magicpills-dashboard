@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import baseUrl from '../config/baseUrl';
 import LandingPageView from '../views/LandingPageView.vue';
 import MainLayout from '../layouts/MainLayout.vue';
 
@@ -28,7 +29,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(/* process.env.BASE_URL */),
+  history: createWebHistory(baseUrl), // Utilise la base dynamique
   routes,
 });
 
