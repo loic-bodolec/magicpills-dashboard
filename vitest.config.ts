@@ -1,9 +1,9 @@
 import { mergeConfig, defineConfig, configDefaults } from 'vitest/config';
-import viteConfig from './vite.config';
+import { createViteConfig } from './vite.config';
 import path from 'path';
 
 export default mergeConfig(
-  viteConfig,
+  createViteConfig('build'), // Génère une configuration statique pour Vitest
   defineConfig({
     test: {
       environment: 'jsdom', // Simule un DOM pour les tests
@@ -24,7 +24,6 @@ export default mergeConfig(
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
-        // '@/styles': path.resolve(__dirname, './src/styles'),
       },
     },
   }),
