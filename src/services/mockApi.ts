@@ -24,7 +24,6 @@ export const fetchMockDashboardData = async (
   const mockData = generateMockData(start, end);
 
   // Filtrer les ventes par jour (si nécessaire)
-  // Filtrer les ventes par jour (si nécessaire)
   const filteredSalesPerDay = mockData.salesPerDay.filter((entry) => {
     const entryDate = entry.date;
     return (!start || entryDate >= start) && (!end || entryDate <= end);
