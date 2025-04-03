@@ -1,5 +1,4 @@
 import { mergeConfig, defineConfig, configDefaults } from 'vitest/config';
-import { createViteConfig } from './vite.config';
 import path from 'path';
 import viteConfig from './vite.config';
 
