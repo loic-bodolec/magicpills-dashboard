@@ -6,7 +6,8 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 import vuetify from 'vite-plugin-vuetify';
 
 export default defineConfig({
-  base: '/magicpills-dashboard/', // Set the base URL to match the repository name
+  // Utiliser une base dynamique en fonction de l'environnement
+  base: process.env.NODE_ENV === 'production' ? '/magicpills-dashboard/' : '/',
   plugins: [
     vue(),
     vueDevTools(),
