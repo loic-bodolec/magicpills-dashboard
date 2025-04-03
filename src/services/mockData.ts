@@ -5,17 +5,8 @@ import type { DashboardData } from '@/types/dashboard';
  * Génère des données de ventes journalières pour une période définie.
  * @param startDateStr - Date de début au format YYYY-MM-DD.
  * @param endDateStr - Date de fin au format YYYY-MM-DD.
- * Génère des données de ventes journalières pour une période définie.
- * @param startDateStr - Date de début au format YYYY-MM-DD.
- * @param endDateStr - Date de fin au format YYYY-MM-DD.
  * @returns Un tableau de ventes par jour avec une date et une valeur aléatoire.
  */
-const generateSalesData = (
-  startDateStr: string,
-  endDateStr: string,
-): { date: string; value: number }[] => {
-  const startDate = new Date(startDateStr);
-  const endDate = new Date(endDateStr);
 const generateSalesData = (
   startDateStr: string,
   endDateStr: string,
