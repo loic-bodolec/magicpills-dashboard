@@ -1,10 +1,10 @@
 import { mergeConfig, defineConfig, configDefaults } from 'vitest/config';
-import { createViteConfig } from './vite.config'; // Importez la fonction utilitaire
 import path from 'path';
+import viteConfig from './vite.config';
 
 // Utilisez une configuration statique pour Vitest
 export default mergeConfig(
-  createViteConfig('build'), // Génère une configuration statique pour Vitest
+  viteConfig,
   defineConfig({
     test: {
       environment: 'jsdom', // Simule un DOM pour les tests
