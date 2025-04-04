@@ -2,6 +2,12 @@
 
 This project is designed as a **learning and practice exercise** for working with **Vue.js 3** and its ecosystem.
 
+## Live Demo
+
+Check out the live demo here: [Magic'Pills Dashboard](https://loic-bodolec.github.io/magicpills-dashboard/)
+
+![Project Image](./readme-images/screenshot.png)
+
 ## Technologies Used
 
 - **TypeScript**
@@ -10,8 +16,6 @@ This project is designed as a **learning and practice exercise** for working wit
 - **Pinia** (State Management)
 - **Vue-router** (Routing)
 - **Echarts / Vue-echarts** (Charts and Graphs)
-
-![Project Image](./readme-images/screenshot.png)
 
 ## Project Goals
 
