@@ -1,5 +1,6 @@
-import process from 'node:process'
-import { defineConfig, devices } from '@playwright/test'
+import process from 'node:process';
+import { defineConfig, devices } from '@playwright/test';
+import baseUrl from './src/config/baseUrl';
 
 /**
  * Read environment variables from file.
@@ -34,7 +35,9 @@ export default defineConfig({
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.CI ? 'http://localhost:4173' : 'http://localhost:5173',
+    baseURL: process.env.CI
+      ? `http://localhost:4173${baseUrl}` // Utilise baseUrl pour CI
+      : `http://localhost:5173${baseUrl}`, // Utilise baseUrl pour local
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -51,44 +54,16 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
       },
     },
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
-
-    /* Test against mobile viewports. */
     // {
-    //   name: 'Mobile Chrome',
+    //   name: 'firefox',
     //   use: {
-    //     ...devices['Pixel 5'],
+    //     ...devices['Desktop Firefox'],
     //   },
     // },
     // {
-    //   name: 'Mobile Safari',
+    //   name: 'webkit',
     //   use: {
-    //     ...devices['iPhone 12'],
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
+    //     ...devices['Desktop Safari'],
     //   },
     // },
   ],
@@ -103,8 +78,8 @@ export default defineConfig({
      * Use the preview server on CI for more realistic testing.
      * Playwright will re-use the local server if there is already a dev-server running.
      */
-    command: process.env.CI ? 'npm run preview' : 'npm run dev',
+    command: process.env.CI ? 'npm run preview' : 'npm run serve',
     port: process.env.CI ? 4173 : 5173,
     reuseExistingServer: !process.env.CI,
   },
-})
+});
