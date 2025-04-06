@@ -28,8 +28,8 @@
   .btn {
     display: inline-block;
     margin-top: 2rem;
-    padding: 1rem;
-    font-size: 1.5rem;
+    padding: 0.75rem;
+    font-size: 1.25rem;
     color: $background-color;
     background-color: $secondary-color;
     border-radius: $border-radius;
@@ -40,4 +40,34 @@
       background-color: color.adjust($secondary-color, $lightness: -10%);
     }
   }
+}
+
+@keyframes subtle-move {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Style pour le texte "superhéros" */
+.superhero {
+  font-size: 2rem !important;
+  font-weight: bold;
+  color: #2d3282;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: subtle-move 3s infinite ease-in-out;
+}
+
+/* Style pour le mot "BOOM" */
+.boom {
+  color: #ff4500;
+  font-size: 2.2rem;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+  font-style: italic;
 }
