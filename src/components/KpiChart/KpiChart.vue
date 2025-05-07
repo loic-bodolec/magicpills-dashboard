@@ -1,5 +1,10 @@
 <template>
   <v-card class="kpi-chart-card">
+    <v-card-title class="kpi-chart-header">
+      <div class="kpi-chart-title">
+        {{ props.title }}
+      </div>
+    </v-card-title>
     <v-card-text class="kpi-chart-container">
       <div class="kpi-chart-scrollable">
       <v-chart
@@ -93,15 +98,15 @@ function getData(): SeriesOption['data'] {
 
 // Fonction pour générer les options du graphique
 function getChartOptions(): EChartsOption {
-  const containerWidth = chartRef.value?.$el.offsetWidth || 0;
-  const fontSize = containerWidth < 400 ? 14 : containerWidth < 600 ? 18 : 20; // Ajuste la taille du texte
+  // const containerWidth = chartRef.value?.$el.offsetWidth || 0;
+  // const fontSize = containerWidth < 400 ? 14 : containerWidth < 600 ? 18 : 20; // Ajuste la taille du texte
 
   return {
-    title: {
-      text: props.title,
-      left: 'left',
-      textStyle: { fontSize, color: '#2d3282', fontWeight: 'bold' },
-    },
+    // title: {
+    //   text: props.title,
+    //   left: 'left',
+    //   textStyle: { fontSize, color: '#2d3282', fontWeight: 'bold' },
+    // },
     tooltip: { trigger: 'item' },
     legend: props.showLegend
       ? { textStyle: { color: '#2d3282' }, orient: 'horizontal', bottom: '0', left: 'center' }
@@ -159,4 +164,11 @@ const chartOptions = ref<EChartsOption>(getChartOptions());
 
 <style scoped lang="scss">
 /* style dans kpiChart.scss */
+.kpi-chart-title {
+  font-size: clamp(0.75rem, 1.5vw, 1rem); // Ajuste la taille entre 0.75rem et 1rem
+  font-weight: bold;
+  color: #2d3282;
+  white-space: wrap;
+  text-align: left;
+}
 </style>
