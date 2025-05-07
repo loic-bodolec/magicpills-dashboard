@@ -11,6 +11,11 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
+.kpi-chart-scrollable {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; // Pour un défilement fluide sur mobile
+}
+
 .kpi-chart {
   min-width: 500px;
   min-height: 300px;

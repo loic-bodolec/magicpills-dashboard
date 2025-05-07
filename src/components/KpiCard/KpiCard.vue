@@ -51,10 +51,18 @@ const props = defineProps<KpiCardProps>();
 </script>
 
 <style scoped lang="scss">
-/* style dans kpiCard.scss */
+/* TODO style dans kpiCard.scss */
 .kpi-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.kpi-title-text {
+  font-size: clamp(0.75rem, 1.5vw, 1rem); // Ajuste la taille entre 0.75rem et 1rem
+  font-weight: bold;
+  color: #2d3282;
+  // white-space: nowrap;
+  overflow: hidden; // Cache le texte qui dépasse
+  text-overflow: ellipsis; // Ajoute "..." si le texte est trop long
 }
 </style>

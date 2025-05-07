@@ -1,6 +1,7 @@
 <template>
   <v-card class="kpi-chart-card">
     <v-card-text class="kpi-chart-container">
+      <div class="kpi-chart-scrollable">
       <v-chart
         ref="chartRef"
         class="kpi-chart"
@@ -10,6 +11,7 @@
         role="img"
         aria-live="polite"
       />
+    </div>
     </v-card-text>
   </v-card>
 </template>
@@ -91,11 +93,14 @@ function getData(): SeriesOption['data'] {
 
 // Fonction pour générer les options du graphique
 function getChartOptions(): EChartsOption {
+  const containerWidth = chartRef.value?.$el.offsetWidth || 0;
+  const fontSize = containerWidth < 400 ? 14 : containerWidth < 600 ? 18 : 20; // Ajuste la taille du texte
+
   return {
     title: {
       text: props.title,
       left: 'left',
-      textStyle: { fontSize: 16, color: '#2d3282', fontWeight: 'bold' },
+      textStyle: { fontSize, color: '#2d3282', fontWeight: 'bold' },
     },
     tooltip: { trigger: 'item' },
     legend: props.showLegend
