@@ -102,11 +102,11 @@ function getChartOptions(): EChartsOption {
   // const fontSize = containerWidth < 400 ? 14 : containerWidth < 600 ? 18 : 20; // Ajuste la taille du texte
 
   return {
-    title: {
-      text: props.title,
-      left: 'left',
-      textStyle: { fontSize: 16, color: '#2d3282', fontWeight: 'bold' },
-    },
+    // title: {
+    //   text: props.title,
+    //   left: 'left',
+    //   textStyle: { fontSize, color: '#2d3282', fontWeight: 'bold' },
+    // },
     tooltip: { trigger: 'item' },
     legend: props.showLegend
       ? { textStyle: { color: '#2d3282' }, orient: 'horizontal', bottom: '0', left: 'center' }
