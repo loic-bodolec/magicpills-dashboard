@@ -164,11 +164,4 @@ const chartOptions = ref<EChartsOption>(getChartOptions());
 
 <style scoped lang="scss">
 /* style dans kpiChart.scss */
-.kpi-chart-title {
-  font-size: clamp(0.75rem, 1.5vw, 1rem); // Ajuste la taille entre 0.75rem et 1rem
-  font-weight: bold;
-  color: #2d3282;
-  white-space: wrap;
-  text-align: left;
-}
 </style>

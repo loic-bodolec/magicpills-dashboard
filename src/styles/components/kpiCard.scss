@@ -22,18 +22,19 @@
   justify-content: space-between;
   align-items: center;
 }
+.kpi-title-text {
+  font-size: clamp(0.85rem, 1.5vw, 1rem); // Ajuste la taille entre 0.85rem et 1.5rem
+  font-weight: bold;
+  color: #2d3282;
+  margin-left: 10px;
+}
 
 .kpi-card-title {
   font-size: $font-size-large !important;
   color: $primary-color;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.kpi-title-text {
-  margin-left: 10px;
+  justify-content: left;
 }
 
 .kpi-card-subtitle {
