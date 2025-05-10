@@ -20,3 +20,11 @@
   min-width: 500px;
   min-height: 300px;
 }
+
+.kpi-chart-title {
+  font-size: clamp(0.85rem, 1.5vw, 1rem); // Ajuste la taille entre 0.85rem et 1rem
+  font-weight: bold;
+  color: #2d3282;
+  white-space: wrap;
+  text-align: left;
+}
